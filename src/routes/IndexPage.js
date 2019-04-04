@@ -1,21 +1,61 @@
 import React from 'react';
 import { connect } from 'dva';
-import styles from './IndexPage.css';
+import styles from './IndexPage.less';
+import { Layout, Carousel } from 'antd';
+import GlobalHeader from '../components/GlobalHeader/index';
 
-function IndexPage() {
-  return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to dva!</h1>
-      <div className={styles.welcome} />
-      <ul className={styles.list}>
-        <li>To get started, edit <code>src/index.js</code> and save to reload.</li>
-        <li><a href="https://github.com/dvajs/dva-docs/blob/master/v1/en-us/getting-started.md">Getting Started</a></li>
-      </ul>
-    </div>
-  );
+
+const { Header, Content, Footer } = Layout;
+
+class App extends React.Component {
+
+  state = {
+
+  };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+  }
+
+
+  render() {
+
+    const { example } = this.props;
+    const { remote } = example;
+
+    console.log(styles["slick-slide"]);
+
+    return (
+      <Layout>
+
+        <GlobalHeader/>
+
+        <Content>
+          <div className={styles.videoList}>
+
+            <div className={styles.carousel}>
+              <Carousel autoplay className={`${styles["ant-carousel"]} ${styles["slick-slide"]}`}>
+                <div><h3>1</h3></div>
+                <div><h3>2</h3></div>
+                <div><h3>3</h3></div>
+                <div><h3>4</h3></div>
+              </Carousel>
+            </div>
+
+            <div className={styles.videoCard}>
+              
+            </div>
+
+          </div>
+        </Content>
+
+      </Layout>
+
+
+    )
+  }
 }
 
-IndexPage.propTypes = {
-};
+App.prototypes = {};
 
-export default connect()(IndexPage);
+export default connect(({example, dispatch}) => ({example, dispatch}))(App);
