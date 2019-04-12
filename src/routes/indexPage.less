@@ -1,0 +1,108 @@
+body{
+  margin: 0;
+}
+
+.container {
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  width: 980px;
+  margin: auto 0;
+  background-color: black;
+}
+
+.videoList {
+  height: 260px;
+  width: 100%;
+}
+
+.ant-carousel {
+  text-align: center;
+  height: 260px;
+  line-height: 260px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.slick-slide {
+  composes: ant-carousel;
+}
+
+.ant-carousel .slick-slide h3 {
+  color: #fff;
+}
+
+.carousel {
+  height: 260px;
+  width: 440px;
+  float: left;
+}
+
+.videoCardList {
+  position: relative;
+  overflow: hidden;
+  height: 260px;
+}
+
+.videoCard {
+  float: left;
+  border-radius: 5px;
+  width: 200px;
+  height: 120px;
+  margin:0 0 17.5px 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  top: 70%;
+  width: 100%;
+  padding: 10px 5px;
+  height: 100%;
+  -moz-transition: top ease 200ms;
+  -o-transition: top ease 200ms;
+  -webkit-transition: top ease 200ms;
+  transition: top ease 200ms;
+}
+
+.videoCard:hover .mask {
+  top: 0;
+}
+
+.videoCard .mask {
+
+  background: linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9));
+}
+
+.title {
+  color: #fff;
+  height: 40px;
+  overflow: hidden;
+  font-size: 15px;
+  margin-bottom: 5px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.narrator {
+  opacity: 0;
+  color: white;
+  font-size: 12px;
+
+  overflow: hidden;
+  transition: all .6s;
+}
+
+.player {
+  composes: narrator;
+  margin-top: 5px;
+}
+
+
+.mask:hover .narrator{
+  opacity: 0.7;
+}

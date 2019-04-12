@@ -1,3 +1,30 @@
 {
-  "extends": "umi"
+  "extends": "umi",
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": { // 使用额外的语言特性
+      "jsx": true // 启用JSX
+    }
+  },
+  "rules": {
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "semi": [2],
+    "react/react-in-jsx-scope": [0],
+    "react/jsx-uses-react": [2],
+    "react/jsx-uses-vars": [2]
+  },
+  "globals": {
+    "React": true
+  }
 }

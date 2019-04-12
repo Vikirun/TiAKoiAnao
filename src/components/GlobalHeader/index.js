@@ -1,22 +1,21 @@
 import React from 'react';
-import styles from './index.less'
+import styles from './index.less';
 import PropTypes from 'prop-types';
 import { config } from '../../config';
 import { Input, Select, Menu, Icon, Layout } from 'antd';
 
 
 const SubMenu = Menu.SubMenu;
-const Search = Input.Search;
 const Option = Select.Option;
 const {
-  Header, Footer, Content
+  Header, Footer,
 } = Layout;
 
 
 export default class GlobalHeader extends React.PureComponent {
 
   state = {
-    current: 'home'
+    current: 'home',
   };
 
   static propTypes = {
@@ -24,14 +23,14 @@ export default class GlobalHeader extends React.PureComponent {
   };
 
   handleSearch = (e) => {
-      console.log(e.target.value)
+      console.log(e.target.value);
   };
 
   handleClick = (e) => {
     console.log("click", e);
     this.setState({
-      current: e.key
-    })
+      current: e.key,
+    });
   };
 
   render() {
@@ -46,9 +45,9 @@ export default class GlobalHeader extends React.PureComponent {
     return (
       <Layout>
         <Header className={styles.header} style={{backgroundImage: `url(${config.imageResourcesURL}/globalheader.png)`}}>
-          <img src={`${config.imageResourcesURL}/title.png`} />
+          <img alt={""} src={`${config.imageResourcesURL}/title.png`} />
         </Header>
-        <Footer>
+        <Footer className={styles["ant-layout-footer"]}>
           <div style={{width: '60%', float: 'left'}}>
             <Menu
               mode={"horizontal"}
@@ -77,7 +76,9 @@ export default class GlobalHeader extends React.PureComponent {
               </Menu.Item>
 
               <Menu.Item key={"join"}>
-                <Icon type="team" />加入我们
+                <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=d68220e84090c7186e7aba16dff8c266231e8ba318b7bd9b49f3548b9e38c9e1">
+                  <Icon type="team" />加入我们
+                </a>
               </Menu.Item>
 
             </Menu>
@@ -88,6 +89,6 @@ export default class GlobalHeader extends React.PureComponent {
         </Footer>
 
       </Layout>
-    )
+    );
   }
 }

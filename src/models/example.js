@@ -1,9 +1,4 @@
-import request from '../utils/request';
-
-async function Request(options) {
-  const {url, ...res} = options;
-  return request(url, res);
-}
+import { listVideos, listVideosByCount } from '../services/example';
 
 
 export default {
@@ -11,7 +6,8 @@ export default {
   namespace: 'example',
 
   state: {
-    remote: []
+    list: [],
+    carouselList: [],
   },
 
   subscriptions: {
@@ -20,20 +16,30 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {  // eslint-disable-line
-      const response = yield call(Request, {
-        url: 'http://localhost:8080/getMessage'
-      });
-
-      const { data } = response;
-      const result = data.message;
-      yield put({
-        type: 'save',
-        payload: {
-          remote: result
+    *listVideos({ payload }, { call, put }) {  // eslint-disable-line
+      const response = yield call(listVideos, payload);
+        if (response.status === 0) {
+          yield put({
+            type: 'save',
+            payload: {
+              list: response.data,
+            },
+          });
         }
-      });
     },
+
+    *listCarousel({ payload }, { call, put }) {  // eslint-disable-line
+      const response = yield call(listVideosByCount, payload);
+      if (response.status === 0) {
+        yield put({
+          type: 'save',
+          payload: {
+            carouselList: response.data,
+          },
+        });
+      }
+    },
+
   },
 
   reducers: {
