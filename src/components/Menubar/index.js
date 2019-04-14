@@ -1,14 +1,12 @@
 import React from 'react';
-import { Icon, Input, Layout, Select, Menu } from "antd";
-import styles from "../GlobalHeader/index.less";
+import { Icon, Input, Select, Menu } from "antd";
 import PropTypes from "prop-types";
+import styles from './index.less';
 
 
 const SubMenu = Menu.SubMenu;
 const Option = Select.Option;
-const {
-  Footer,
-} = Layout;
+
 
 
 export default class MenuBar extends React.Component {
@@ -42,8 +40,8 @@ export default class MenuBar extends React.Component {
     );
 
     return (
-      <Footer>
-        <div style={{width: '60%', float: 'left'}}>
+      <div className={styles.menuBar}>
+        <div className={styles.leftMenu}>
           <Menu
             mode={"horizontal"}
             selectedKeys={[this.state.current]}
@@ -54,7 +52,7 @@ export default class MenuBar extends React.Component {
             </Menu.Item>
 
             <SubMenu title={<span><Icon type="video-camera" />视频</span>}>
-              <Menu.Item key={"teaching"}>教学系列</Menu.Item>
+              <Menu.Item key={"teach"}>教学系列</Menu.Item>
               <Menu.Item key={"extreme"}>极限系列</Menu.Item>
             </SubMenu>
 
@@ -75,13 +73,14 @@ export default class MenuBar extends React.Component {
                 <Icon type="team" />加入我们
               </a>
             </Menu.Item>
-
           </Menu>
         </div>
-        <div className={styles.searchBar}>
+
+        <div>
           <Input addonBefore={SelectBefore} onChange={this.handleSearch} placeholder={"搜索内容"} size={"large"} />
         </div>
-      </Footer>
+
+      </div>
     );
   }
 }

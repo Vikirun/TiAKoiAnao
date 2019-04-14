@@ -1,4 +1,4 @@
-import { listVideos, listVideosByCount } from '../services/example';
+import { listVideos, listVideosByCount, insertImage, insertArticle } from '../services/example';
 
 
 export default {
@@ -8,6 +8,8 @@ export default {
   state: {
     list: [],
     carouselList: [],
+    imageUrl: '',
+    articleList: [],
   },
 
   subscriptions: {
@@ -37,6 +39,28 @@ export default {
             carouselList: response.data,
           },
         });
+      }
+    },
+
+    *insertImage({ payload, callback }, { call, put }) {
+      const response = yield call(insertImage, payload);
+      if (response.status === 0) {
+        yield put({
+          type: 'save',
+          payload: {
+            imageUrl: response.data,
+          },
+        });
+        if (callback && typeof callback === 'function') {
+          callback(response);
+        }
+      }
+    },
+
+    *insertArticle({ payload }, { call, put }) {
+      const response = yield call(insertArticle, payload);
+      if (response.status === 0) {
+        return response;
       }
     },
 
