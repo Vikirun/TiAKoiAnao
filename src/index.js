@@ -5,10 +5,12 @@ import './index.css';
 const app = dva();
 
 // 2. Plugins
-// app.use({});
+// app.use(createLoading());
 
 // 3. Model
 app.model(require('./models/example').default);
+app.model(require('./models/form').default);
+app.model(require('./models/video').default);
 
 // 4. Router
 app.router(require('./router').default);

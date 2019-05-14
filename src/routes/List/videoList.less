@@ -1,0 +1,65 @@
+.coverCardList {
+  margin-bottom: -24px;
+
+  .card {
+    :global {
+      .ant-card-meta-title {
+        margin-bottom: 4px;
+        & > a {
+          display: inline-block;
+          max-width: 100%;
+          color: black;
+        }
+      }
+      .ant-card-meta-description {
+        height: 44px;
+        overflow: hidden;
+        line-height: 22px;
+      }
+    }
+
+    &:hover {
+      :global {
+        .ant-card-meta-title > a {
+          color: #1890ff;
+
+        }
+      }
+    }
+  }
+
+  .cardItemContent {
+    display: flex;
+    height: 20px;
+    margin-top: 16px;
+    margin-bottom: -4px;
+    line-height: 20px;
+    & > span {
+      flex: 1;
+      color: green;
+      font-size: 12px;
+    }
+    .avatarList {
+      flex: 0 1 auto;
+    }
+  }
+
+  :global {
+    .ant-list .ant-list-item-content-single {
+      max-width: 100%;
+    }
+  }
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  padding: 10px 5px;
+  height: 100%;
+  -moz-transition: top ease 200ms;
+  -o-transition: top ease 200ms;
+  -webkit-transition: top ease 200ms;
+  transition: top ease 200ms;
+}

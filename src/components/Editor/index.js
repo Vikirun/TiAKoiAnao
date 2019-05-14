@@ -1,6 +1,5 @@
 import React from 'react';
 import Editor from 'wangeditor';
-import { Input } from 'antd';
 
 
 export default class MyEditor extends React.Component {
@@ -20,9 +19,9 @@ export default class MyEditor extends React.Component {
     const editor = new Editor(elem);
     this.editor = editor;
     editor.customConfig.zIndex = 100;
-    editor.customConfig.uploadImgServer = 'http://holer50043.restclient.cn/api/article/insertImage';
+    editor.customConfig.uploadImgServer = 'http://localhost:8080/api/article/insertImage';
     editor.customConfig.uploadImgMaxLength = 20;
-    editor.customConfig.customUploadImg = this.props.insertImage;
+    editor.customConfig.customUploadImg = this.props.method;
     editor.customConfig.menus = [
       'head', // 标题
       'bold', // 粗体
@@ -69,18 +68,15 @@ export default class MyEditor extends React.Component {
       '创建': 'init',
     };
     editor.create();
-
   };
 
   getContent = () => {
-
     return this.editor.txt.html();
   };
 
   render() {
     return (
-
-        <div ref={"myRef"} />
+      <div ref={"myRef"} />
     );
   }
 }

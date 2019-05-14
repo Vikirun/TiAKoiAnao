@@ -1,12 +1,12 @@
 import request from '../utils/request';
 import { stringify } from "qs";
 
-export async function listVideos() {
-  return request('/video/listVideos');
+export async function listVideos(params) {
+  return request(`/video/listVideos?${stringify((params))}`);
 }
 
-export async function listVideosByCount(params) {
-  return request(`/video/listVideosByCount?${stringify(params)}`);
+export async function listVideosCarousel(params) {
+  return request(`/video/listVideosCarousel?${stringify(params)}`);
 }
 
 export async function insertImage(params) {
@@ -18,7 +18,18 @@ export async function insertImage(params) {
 
 export async function insertArticle(params) {
   return request(`/article/insertArticle`, {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
     method: 'POST',
-    body: stringify(params),
+    body: JSON.stringify(params),
   });
+}
+
+export async function listArticles(params) {
+  return request(`/article/listArticles?${stringify(params)}`);
+}
+
+export async function listCar() {
+  return request(`/car/listCar`);
 }

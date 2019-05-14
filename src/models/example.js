@@ -1,4 +1,5 @@
-import { listVideos, listVideosByCount, insertImage, insertArticle } from '../services/example';
+import { listVideos, listVideosCarousel, insertImage, insertArticle, listArticles, listCar } from '../services/example';
+import { routerRedux } from 'dva/router';
 
 
 export default {
@@ -6,32 +7,37 @@ export default {
   namespace: 'example',
 
   state: {
-    list: [],
+    videoList: [],
     carouselList: [],
     imageUrl: '',
-    articleList: [],
+    articleList: '',
+    carList: [],
   },
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
+
     },
   },
 
   effects: {
-    *listVideos({ payload }, { call, put }) {  // eslint-disable-line
+    *listVideos({ payload, callback }, { call, put }) {  // eslint-disable-line
       const response = yield call(listVideos, payload);
-        if (response.status === 0) {
-          yield put({
-            type: 'save',
-            payload: {
-              list: response.data,
-            },
-          });
-        }
+      if (response.status === 0) {
+        yield put({
+          type: 'save',
+          payload: {
+            videoList: response.data,
+          },
+        });
+      }
+      if (callback && typeof callback === 'function') {
+        callback(response);
+      }
     },
 
     *listCarousel({ payload }, { call, put }) {  // eslint-disable-line
-      const response = yield call(listVideosByCount, payload);
+      const response = yield call(listVideosCarousel, payload);
       if (response.status === 0) {
         yield put({
           type: 'save',
@@ -57,12 +63,45 @@ export default {
       }
     },
 
-    *insertArticle({ payload }, { call, put }) {
+    *insertArticle({ payload, callback }, { call }) {
       const response = yield call(insertArticle, payload);
+      payload.resolve(response);
+    },
+
+    *listArticles({ payload, callback }, { call, put }) {
+      const response = yield call(listArticles, payload);
       if (response.status === 0) {
-        return response;
+        yield put({
+          type: 'save',
+          payload: {
+            articleList: response.data,
+          },
+        });
+        if (callback && typeof callback === 'function') {
+          callback(response);
+        }
       }
     },
+
+    *listCar({ payload, callback }, { call, put }) {
+      const response = yield call(listCar, payload);
+      if (response.status === 0) {
+        yield put({
+          type: 'save',
+          payload: {
+            carList: response.data,
+          },
+        });
+        if (callback && typeof callback === 'function') {
+          callback(response);
+        }
+      }
+    },
+
+    *redirect({payload}, {put}) {
+      yield put(routerRedux.push("/"));
+    },
+
 
   },
 

@@ -1,15 +1,15 @@
 import React from 'react';
-import { Icon, Input, Select, Menu } from "antd";
+import {Icon, Input, Menu, Select} from "antd";
 import PropTypes from "prop-types";
 import styles from './index.less';
+import {connect} from "dva";
 
 
 const SubMenu = Menu.SubMenu;
 const Option = Select.Option;
 
 
-
-export default class MenuBar extends React.Component {
+class MenuBar extends React.Component {
 
   state = {
     current: 'home',
@@ -19,15 +19,29 @@ export default class MenuBar extends React.Component {
     onSearch: PropTypes.func,
   };
 
-  handleSearch = (e) => {
-    console.log(e.target.value);
+  componentDidMount() {
+    if (this.props.selectedKeys) {
+      this.setState({
+        current: this.props.selectedKeys,
+      });
+    }
+  }
+
+  handleSearch = (value) => {
+    this.props.handleSearch(value);
   };
 
   handleClick = (e) => {
-    console.log("click", e);
     this.setState({
       current: e.key,
     });
+    if (this.props.sign !== 1) {
+      this.props.anchorMethod(e.key);
+    } else {
+      this.props.dispatch({
+        type: 'example/redirect',
+      });
+    }
   };
 
   render() {
@@ -69,7 +83,7 @@ export default class MenuBar extends React.Component {
             </Menu.Item>
 
             <Menu.Item key={"join"}>
-              <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=d68220e84090c7186e7aba16dff8c266231e8ba318b7bd9b49f3548b9e38c9e1">
+              <a target="_blank" rel="noopener noreferrer" href="//shang.qq.com/wpa/qunwpa?idkey=d68220e84090c7186e7aba16dff8c266231e8ba318b7bd9b49f3548b9e38c9e1">
                 <Icon type="team" />加入我们
               </a>
             </Menu.Item>
@@ -77,10 +91,13 @@ export default class MenuBar extends React.Component {
         </div>
 
         <div>
-          <Input addonBefore={SelectBefore} onChange={this.handleSearch} placeholder={"搜索内容"} size={"large"} />
+          <Input.Search addonBefore={SelectBefore} onSearch={this.handleSearch} placeholder={"搜索内容"} size={"large"} />
         </div>
 
       </div>
     );
   }
 }
+
+export default connect(({example, dispatch}) => ({example, dispatch}))(MenuBar);
+
