@@ -1,17 +1,33 @@
 import React, {Component} from 'react';
 import styles from "./index.less";
 import {Link} from 'dva/router';
-import {Carousel, Icon, Layout} from "antd";
+import {Carousel, Icon, Layout, Upload, Button} from "antd";
 
 const { Content } = Layout;
 
 
 export default class VideoList extends Component {
   render(){
+    const props = {
+      action: 'http://localhost:8080/api/video/uploadFile',
+      onChange({file, fileList}) {
+        if (file.status !== 'uploading') {
+          console.log(file, fileList);
+        }
+      },
+    };
+
     return (
       <Content>
         <div className={styles.titleBar}>
           <h2 style={{borderLeft: 'red 3px solid', paddingLeft: '10px'}}>视频</h2>
+          <div>
+            <Upload {...props}>
+              <Button>
+                <Icon type="upload" /> Upload
+              </Button>
+            </Upload>
+          </div>
           <Link to={{pathname: "/video"}}><Icon style={{fontSize: '1.5rem'}} type="ellipsis" title={"更多视频"} /></Link>
         </div>
         <div className={styles.videoList}>

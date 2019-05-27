@@ -2,6 +2,8 @@ import request from '../utils/request';
 import { stringify } from "qs";
 
 export async function listVideos(params) {
+  console.log(params);
+  console.log(stringify(params));
   return request(`/video/listVideos?${stringify((params))}`);
 }
 

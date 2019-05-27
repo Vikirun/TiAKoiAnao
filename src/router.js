@@ -12,7 +12,7 @@ function RouterConfig({ history }) {
         <Route path="/" exact component={IndexPage} />
         <Route path="/video" exact component={VideoList} />
         <Route path="/video/display" component={Video} />
-        <Route path={"/article"} component={Article} />
+        <Route path="/article" component={Article} />
       </Switch>
     </Router>
   );

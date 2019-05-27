@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    #menu ul{
+      width:100px;
+      position:absolute;
+      list-style:none;
+      background: #8cc8ff;
+    }
+
+    #menu li{
+      width:100px;
+      position: relative;
+    }
+
+    #menu li>ul{
+      left: 100px;
+      top: 0;
+      display: none;
+    }
+
+    #menu li:hover>ul{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div id="menu">
+  <ul>
+    <li style="color: red;" "background: yellow"><a href="#">一级1</a>
+      <ul>
+        <li>二级1</li>
+        <li><a href="#">二级2</a>
+          <ul>
+            <li><a href="#">三级1</a></li>
+            <li><a href="#">三级2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>一级2</li>
+    <li><a href="#">一级3</a>
+      <ul>
+        <li>二级1</li>
+        <li>二级2</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
